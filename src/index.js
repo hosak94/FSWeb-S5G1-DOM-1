@@ -49,12 +49,12 @@ console.log("Proje açıldı!");
 
 /* Kodlar Buradan aşağıya */
 //navbar
-let navbaslik = document.querySelectorAll("header nav a");
+const navbaslik = document.querySelectorAll("header nav a");
 for (let i = 0; i < navbaslik.length; i++) {
   navbaslik[i].textContent = siteContent.nav[`nav-item-${i + 1}`];
   navbaslik[i].classList.add("italic");
 }
-var logoImg = document.getElementById("logo-img");
+const logoImg = document.getElementById("logo-img");
 logoImg.setAttribute("src", "http://localhost:9000/img/logo.png");
 //cta
 const ctaText = document.querySelector(".cta-text");
@@ -64,40 +64,88 @@ ctaText.querySelector("button").textContent = "Başlayın";
 const ctaImg = document.getElementById("cta-img");
 ctaImg.setAttribute("src", "http://localhost:9000/img/cta.png");
 
-//ana içerik top content
-const topContent = document.querySelectorAll(".top-content .text-content");
-for (let i = 0; i < 2; i++) {
-  topContent[i].querySelector("h4").textContent =
-    siteContent["ana-içerik"][`${i === 0 ? "özellikler-h4" : "hakkımızda-h4"}`];
-  topContent[i].querySelector("p").textContent =
-    siteContent["ana-içerik"][
-      `${i === 0 ? "özellikler-içerik" : "hakkımızda-içerik"}`
-    ];
-}
+//top Content
+// özellikler h4 ve içeriği p elementi
+const featuresHeading = document.querySelector(
+  ".top-content .text-content:first-of-type h4"
+);
+featuresHeading.textContent = siteContent["ana-içerik"]["özellikler-h4"];
+
+const featuresContent = document.querySelector(
+  ".top-content .text-content:first-of-type p"
+);
+featuresContent.textContent = siteContent["ana-içerik"]["özellikler-içerik"];
+
+// hakkımızda h4 ve içeriği p elementi
+const aboutHeading = document.querySelector(
+  ".top-content .text-content:last-of-type h4"
+);
+aboutHeading.textContent = siteContent["ana-içerik"]["hakkımızda-h4"];
+
+const aboutContent = document.querySelector(
+  ".top-content .text-content:last-of-type p"
+);
+aboutContent.textContent = siteContent["ana-içerik"]["hakkımızda-içerik"];
+
+//mid İmg
 const midImg = document.querySelector(".middle-img");
 midImg.setAttribute("src", "http://localhost:9000/img/accent.png");
 
-//bottom content
-const bottomContent = document.querySelector(".bottom-content");
+//bottom Content
+// bottom-content sınıfının altındaki h4 ve p etiketlerine siteContent objesinden verileri yerleştirir
+// Servisler
+const servislerH4 = document.querySelector(
+  ".bottom-content .text-content:nth-child(1) h4"
+);
+const servislerP = document.querySelector(
+  ".bottom-content .text-content:nth-child(1) p"
+);
+servislerH4.textContent = siteContent["ana-içerik"]["servisler-h4"];
+servislerP.textContent = siteContent["ana-içerik"]["servisler-içeriği"];
 
-for (let i = 2; i < 5; i++) {
-  const textContent = document.createElement("div");
-  textContent.classList.add("text-content");
+// Ürünler
+const ürünlerH4 = document.querySelector(
+  ".bottom-content .text-content:nth-child(2) h4"
+);
+const ürünlerP = document.querySelector(
+  ".bottom-content .text-content:nth-child(2) p"
+);
+ürünlerH4.textContent = siteContent["ana-içerik"]["ürünler-h4"];
+ürünlerP.textContent = siteContent["ana-içerik"]["ürünler-içeriği"];
 
-  const h4 = document.createElement("h4");
-  h4.textContent =
-    siteContent["ana-içerik"][
-      `${Object.keys(siteContent["ana-içerik"])[i * 2]}`
-    ];
+// Vizyon
+const vizyonH4 = document.querySelector(
+  ".bottom-content .text-content:nth-child(3) h4"
+);
+const vizyonP = document.querySelector(
+  ".bottom-content .text-content:nth-child(3) p"
+);
+vizyonH4.textContent = siteContent["ana-içerik"]["vizyon-h4"];
+vizyonP.textContent = siteContent["ana-içerik"]["vizyon-içeriği"];
 
-  const p = document.createElement("p");
-  p.textContent =
-    siteContent["ana-içerik"][
-      `${Object.keys(siteContent["ana-içerik"])[i * 2 + 1]}`
-    ];
-
-  textContent.appendChild(h4);
-  textContent.appendChild(p);
-  bottomContent.appendChild(textContent);
-}
 //contact
+const iletisimsection = document.querySelector(".contact");
+const h4 = document.createElement("h4");
+h4.textContent = siteContent.iletisim["iletişim-h4"];
+iletisimsection.appendChild(h4);
+
+const adresP = document.createElement("p");
+const adresText = document.createTextNode(siteContent.iletisim.adres);
+adresP.appendChild(adresText);
+
+const telefonP = document.createElement("p");
+const telefonText = document.createTextNode(siteContent.iletisim.telefon);
+telefonP.appendChild(telefonText);
+
+const emailP = document.createElement("p");
+const emailText = document.createTextNode(siteContent.iletisim.email);
+emailP.appendChild(emailText);
+
+iletisimsection.appendChild(adresP);
+iletisimsection.appendChild(telefonP);
+iletisimsection.appendChild(emailP);
+
+//footer
+const footer = document.querySelector("footer a");
+footer.classList.add("bold");
+footer.textContent = siteContent.footer.copyright;
